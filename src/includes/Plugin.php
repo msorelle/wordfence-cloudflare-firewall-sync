@@ -76,6 +76,8 @@ final class Plugin {
   }
 
   public static function activate(): void {
+    self::get_version();
+    self::get_text_domain();
     self::define_constants();
 
     if (is_multisite() && isset($_GET['networkwide']) && $_GET['networkwide'] === '1') {
