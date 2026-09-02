@@ -115,20 +115,20 @@ final class Fields {
   }
 
   public static function maybe_handle_manual_block(array $old_value, array $new_value): void {
-    if (!empty($sanitized['manual_block_ip']) && filter_var($sanitized['manual_block_ip'], FILTER_VALIDATE_IP)) {
+    if (!empty($new_value['manual_block_ip']) && filter_var($new_value['manual_block_ip'], FILTER_VALIDATE_IP)) {
       $client = new Client(
-        $sanitized['cloudflare_api_token'] ?? '',
-        $sanitized['cloudflare_zone_id'] ?? ''
+        $new_value['cloudflare_api_token'] ?? '',
+        $new_value['cloudflare_zone_id'] ?? ''
       );
 
-      $success = $client->create_block($sanitized['manual_block_ip']);
+      $success = $client->create_block($new_value['manual_block_ip']);
 
       add_settings_error(
         'firewall_sync_messages',
         'manual_block',
         $success
-          ? __('Successfully blocked IP', Plugin::get_text_domain()) . ": {$sanitized['manual_block_ip']}"
-          : __('Failed to block IP', Plugin::get_text_domain()) . ": {$sanitized['manual_block_ip']}",
+          ? __('Successfully blocked IP', Plugin::get_text_domain()) . ": {$new_value['manual_block_ip']}"
+          : __('Failed to block IP', Plugin::get_text_domain()) . ": {$new_value['manual_block_ip']}",
         $success ? 'updated' : 'error'
       );
 
@@ -266,7 +266,7 @@ final class Fields {
       $options['cloudflare_api_token'] ?? '',
       $options['cloudflare_zone_id'] ?? ''
     );
-    $success = $client->create_test_block($ip);
+    $success = $client->create_block($ip);
 
     if ($success) {
       BlockLogger::log($ip, 'manual: ' . $reason);

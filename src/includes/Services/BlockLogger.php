@@ -38,7 +38,7 @@ final class BlockLogger {
     global $wpdb;
 
     $wpdb->insert(
-      $wpdb-prefix . self::TABLE,
+      $wpdb->prefix . self::TABLE,
       [
         'ip' => $ip,
         'reason' => $reason,
@@ -70,7 +70,7 @@ final class BlockLogger {
   }
 
   public static function has_synced(string $ip): bool {
-    global $wbdb;
+    global $wpdb;
 
     $table = $wpdb->prefix . self::TABLE;
 
