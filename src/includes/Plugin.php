@@ -93,8 +93,9 @@ final class Plugin {
 
   public static function run_site_activation(): void {
     $stored_version = get_option('firewall_sync_version');
+    $stored_version = $stored_version === false ? null : $stored_version;
 
-    if ($stored_version === false) {
+    if ($stored_version === null) {
       BlockLogger::create_table();
     }
 
