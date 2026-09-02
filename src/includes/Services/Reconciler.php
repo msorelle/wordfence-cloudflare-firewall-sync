@@ -1,5 +1,7 @@
 <?php
 
+declare(strict_types=1);
+
 namespace WPCF\FirewallSync\Services;
 
 use WPCF\FirewallSync\Cloudflare\Client;

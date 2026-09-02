@@ -55,7 +55,7 @@ final class Plugin {
     }
 
     if (!defined('WPCF_FS_PLUGIN_DIR')) {
-      define('WPCF_FS_PLUGIN_DIR', __DIR__ . '/../index.php');
+      define('WPCF_FS_PLUGIN_DIR', plugin_dir_path(__DIR__ . '/../index.php'));
     }
 
     if (!defined('WPCF_FS_PLUGIN_URL')) {
